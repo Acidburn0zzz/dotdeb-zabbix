@@ -17,8 +17,8 @@ Build-Depends: debhelper (>= 9), automake1.9, dh-autoreconf, po-debconf
  ,libssh2-1-dev (>= 1.0.0)
 Standards-Version: 3.9.3
 Homepage: http://zabbix.com
-Vcs-Git: git://git.debian.org/git/collab-maint/zabbix.git
-Vcs-Browser: http://git.debian.org/?p=collab-maint/zabbix.git
+VCS-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/zabbix.git
+VCS-Git: git://anonscm.debian.org/collab-maint/zabbix.git
 
 Package: zabbix-agent
 Architecture: any
