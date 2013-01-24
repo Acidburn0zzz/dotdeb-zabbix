@@ -10,7 +10,7 @@ Comment:
 
 Files: debian/*
 Copyright: 2009-2012 Christoph Haas <haas@debian.org>
-           2012      Dmitry Smirnov <onlyjob@member.fsf.org>
+           2012-2013 Dmitry Smirnov <onlyjob@member.fsf.org>
            2006-2009 Fabio Tranchitella <kobold@debian.org>
            2006-2011 Michael Ablassmeier <abi@debian.org>
 License: GPL-2+
