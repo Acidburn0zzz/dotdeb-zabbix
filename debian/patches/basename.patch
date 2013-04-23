@@ -6,10 +6,10 @@ Description: fix columns sorting and pagination in frontend-php
  Problem is manifesting with nginx/php-fpm
  or with Apache/mod_proxy.
 
-Index: zabbix-2.0.4/frontends/php/include/func.inc.php
+Index: zabbix-2.0.6/frontends/php/include/func.inc.php
 ===================================================================
---- zabbix-2.0.4.orig/frontends/php/include/func.inc.php
-+++ zabbix-2.0.4/frontends/php/include/func.inc.php
+--- zabbix-2.0.6.orig/frontends/php/include/func.inc.php
++++ zabbix-2.0.6/frontends/php/include/func.inc.php
 @@ -1538,7 +1538,7 @@ function make_sorting_header($obj, $tabf
  		$script = "javascript: return updater.onetime_update('".ZBX_PAGE_MAIN_HAT."', '".$url."');";
  	}
@@ -19,7 +19,7 @@ Index: zabbix-2.0.4/frontends/php/include/func.inc.php
  	}
  
  	zbx_value2array($obj);
-@@ -1638,13 +1638,13 @@ function getPagingLine(&$items) {
+@@ -1653,13 +1653,13 @@ function getPagingLine(&$items) {
  		$url = new Curl();
  		if ($startPage > 1) {
  			$url->setArgument('page', 1);
@@ -35,7 +35,7 @@ Index: zabbix-2.0.4/frontends/php/include/func.inc.php
  			$pageline[] = ' | ';
  		}
  
-@@ -1658,7 +1658,7 @@ function getPagingLine(&$items) {
+@@ -1673,7 +1673,7 @@ function getPagingLine(&$items) {
  			}
  			else {
  				$url->setArgument('page', $p);
@@ -44,7 +44,7 @@ Index: zabbix-2.0.4/frontends/php/include/func.inc.php
  			}
  
  			$pageline[] = $pagespan;
-@@ -1671,14 +1671,14 @@ function getPagingLine(&$items) {
+@@ -1686,14 +1686,14 @@ function getPagingLine(&$items) {
  			$pageline[] = ' | ';
  
  			$url->setArgument('page', $currentPage + 1);
