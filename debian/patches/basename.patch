@@ -6,10 +6,10 @@ Description: fix columns sorting and pagination in frontend-php
  Problem is manifesting with nginx/php-fpm
  or with Apache/mod_proxy.
 
-Index: zabbix-2.0.6/frontends/php/include/func.inc.php
+Index: zabbix-2.0.7/frontends/php/include/func.inc.php
 ===================================================================
---- zabbix-2.0.6.orig/frontends/php/include/func.inc.php
-+++ zabbix-2.0.6/frontends/php/include/func.inc.php
+--- zabbix-2.0.7.orig/frontends/php/include/func.inc.php
++++ zabbix-2.0.7/frontends/php/include/func.inc.php
 @@ -1538,7 +1538,7 @@ function make_sorting_header($obj, $tabf
  		$script = "javascript: return updater.onetime_update('".ZBX_PAGE_MAIN_HAT."', '".$url."');";
  	}
