@@ -1,26 +1,90 @@
-zabbix (1:2.0.7-1~dotdeb.1) stable; urgency=low
+zabbix (1:2.0.8-1~dotdeb.1) stable; urgency=low
 
   * New upstream release
 
- -- Guillaume Plessis <gui@dotdeb.org>  Thu, 01 Aug 2013 11:11:42 -0700
+ -- Guillaume Plessis <gui@dotdeb.org>  Wed, 21 Aug 2013 11:30:42 -0700
 
-zabbix (1:2.0.6-1~dotdeb.1) stable; urgency=low
+zabbix (1:2.0.7+dfsg-1) unstable; urgency=low
 
-  * New upstream release
+  * New upstream release [July 2013].
+  * New "ZBX-5924.patch" to fix CVE-2012-6086 (Closes: #697443).
+  * Fixed proxy restart issue by adding PidFile to "zabbix_proxy.conf"
+    (Closes: #718246).
 
- -- Guillaume Plessis <gui@dotdeb.org>  Tue, 07 May 2013 07:51:42 -0700
+ -- Dmitry Smirnov <onlyjob@debian.org>  Sat, 03 Aug 2013 18:53:28 +1000
 
-zabbix (1:2.0.5-1~dotdeb.0) stable; urgency=low
+zabbix (1:2.0.6+dfsg-2) unstable; urgency=low
 
-  * New upstream release
+  * "basename.patch" replaced with backported "ZBX-4986.patch".
+  * Dropped obsolete "libcurl3-gnutls-dev" alternative from Build-Depends.
+  * frontend-php:
+    - "php5-pgsql | php5-mysql" removed from Suggests.
+      since those packages are already in Depends;
+    + promote "php5-pgsql" as first alternative in Depends because
+      "SQL database" in tasksel installs PostgreSQL.
+  * With their consent, removed
+       Fabio Tranchitella <kobold@debian.org>
+    and
+       Michael Ablassmeier <abi@debian.org>
+    from Uploaders. Thanks for your contribution, good fellows. :)
+  * Source "/etc/default/rcS" instead of "/lib/init/vars.sh" in init
+    scripts (lintianisation: "W: init.d-script-call-internal-API").
+  * Reference get-orig-source implementation.
 
- -- Guillaume Plessis <gui@dotdeb.org>  Tue, 12 Feb 2013 14:12:42 +0100
+ -- Dmitry Smirnov <onlyjob@debian.org>  Wed, 24 Jul 2013 03:33:23 +1000
 
-zabbix (1:2.0.4-1~dotdeb.0) stable; urgency=low
+zabbix (1:2.0.6+dfsg-1) unstable; urgency=low
 
-  * New upstream release
+  * New upstream release [April 2013].
+  * Removed unnecessary versioned dependencies.
+  * Corrected license name "MIT" --> "Expat".
+  * Updated my email address.
 
- -- Guillaume Plessis <gui@dotdeb.org>  Sat,  8 Dec 2012 17:16:42 +0100
+ -- Dmitry Smirnov <onlyjob@debian.org>  Wed, 24 Apr 2013 14:00:51 +1000
+
+zabbix (1:2.0.5+dfsg-1) unstable; urgency=low
+
+  * New upstream release [February 2013].
+  * Backported patches dropped:
+    - ZBX-5986{ab}_fix-favourite-graphs.patch
+    - ZBX-6097_CVE-2013-1364.patch
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Wed, 13 Feb 2013 05:33:56 +1100
+
+zabbix (1:2.0.4+dfsg-3) unstable; urgency=low
+
+  * New backported patch [ZBX-5986{ab}_fix-favourite-graphs] to correct
+    favourite graphs in dashboard.
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Thu, 07 Feb 2013 16:58:09 +1100
+
+zabbix (1:2.0.4+dfsg-2) unstable; urgency=low
+
+  * CVE-2013-1364: fixed the ability to override LDAP configuration when
+    calling user.login via API (Closes: #698541).
+  * Updated VCS links.
+  * Minor copyright years update.
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Sun, 20 Jan 2013 20:01:39 +1100
+
+zabbix (1:2.0.4+dfsg-1) unstable; urgency=low
+
+  * Upload to unstable.
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Sun, 20 Jan 2013 17:19:55 +1100
+
+zabbix (1:2.0.4+dfsg-1~exp0) experimental; urgency=low
+
+  * New upstream release [December 2012].
+  * [debian/control]
+    - Dropped obsolete "DM-Upload-Allowed: yes".
+    - Dropped all debconf-related dependencies.
+    + Standards to 3.9.4
+  * [debian/rules]
+    + get-orig-source to clean executable attributes from images.
+  * patches [basename,config-debian-customizations] are refreshed.
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Tue, 11 Dec 2012 09:34:39 +1100
 
 zabbix (1:2.0.3+dfsg-1~exp1) experimental; urgency=low
 

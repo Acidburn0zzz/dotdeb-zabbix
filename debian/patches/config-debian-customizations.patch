@@ -1,12 +1,13 @@
-Last-Update: 2012-07-16
-Author: Christoph Haas <haas@debian.org>
+Last-Update: 2013-07-29
 Forwarded: not-needed
+Author: Christoph Haas <haas@debian.org>
+Reviewed-By: Dmitry Smirnov <onlyjob@member.fsf.org>
 Description: Change default paths and settings in config files specifically for Debian
 
-Index: zabbix-2.0.7/conf/zabbix_agentd.conf
+Index: zabbix-2.0.8/conf/zabbix_agentd.conf
 ===================================================================
---- zabbix-2.0.7.orig/conf/zabbix_agentd.conf
-+++ zabbix-2.0.7/conf/zabbix_agentd.conf
+--- zabbix-2.0.8.orig/conf/zabbix_agentd.conf
++++ zabbix-2.0.8/conf/zabbix_agentd.conf
 @@ -10,6 +10,8 @@
  # Default:
  # PidFile=/tmp/zabbix_agentd.pid
@@ -53,10 +54,10 @@ Index: zabbix-2.0.7/conf/zabbix_agentd.conf
  
  ####### USER-DEFINED MONITORED PARAMETERS #######
  
-Index: zabbix-2.0.7/conf/zabbix_proxy.conf
+Index: zabbix-2.0.8/conf/zabbix_proxy.conf
 ===================================================================
---- zabbix-2.0.7.orig/conf/zabbix_proxy.conf
-+++ zabbix-2.0.7/conf/zabbix_proxy.conf
+--- zabbix-2.0.8.orig/conf/zabbix_proxy.conf
++++ zabbix-2.0.8/conf/zabbix_proxy.conf
 @@ -74,7 +74,7 @@ Hostname=Zabbix proxy
  # Default:
  # LogFile=
@@ -66,7 +67,15 @@ Index: zabbix-2.0.7/conf/zabbix_proxy.conf
  
  ### Option: LogFileSize
  #	Maximum size of log file in MB.
-@@ -138,7 +138,7 @@ DBName=zabbix_proxy
+@@ -104,6 +104,7 @@ LogFile=/tmp/zabbix_proxy.log
+ # Mandatory: no
+ # Default:
+ # PidFile=/tmp/zabbix_proxy.pid
++PidFile=/var/run/zabbix/zabbix_proxy.pid
+ 
+ ### Option: DBHost
+ #	Database host name.
+@@ -138,7 +139,7 @@ DBName=zabbix_proxy
  # Default:
  # DBUser=
  
@@ -75,7 +84,7 @@ Index: zabbix-2.0.7/conf/zabbix_proxy.conf
  
  ### Option: DBPassword
  #	Database password. Ignored for SQLite.
-@@ -417,6 +417,7 @@ DBUser=root
+@@ -417,6 +418,7 @@ DBUser=root
  # Mandatory: no
  # Default:
  # FpingLocation=/usr/sbin/fping
@@ -83,7 +92,7 @@ Index: zabbix-2.0.7/conf/zabbix_proxy.conf
  
  ### Option: Fping6Location
  #	Location of fping6.
-@@ -426,6 +427,7 @@ DBUser=root
+@@ -426,6 +428,7 @@ DBUser=root
  # Mandatory: no
  # Default:
  # Fping6Location=/usr/sbin/fping6
@@ -91,7 +100,7 @@ Index: zabbix-2.0.7/conf/zabbix_proxy.conf
  
  ### Option: SSHKeyLocation
  #	Location of public and private keys for SSH checks and actions
-@@ -453,11 +455,11 @@ DBUser=root
+@@ -453,11 +456,11 @@ DBUser=root
  
  ### Option: Include
  #	You may include individual files or all files in a directory in the configuration file.
@@ -106,10 +115,10 @@ Index: zabbix-2.0.7/conf/zabbix_proxy.conf
 -# Include=/usr/local/etc/zabbix_proxy.conf.d/
 +# Include=/etc/zabbix/zabbix_proxy.general.conf
 +# Include=/etc/zabbix/zabbix_proxy.conf.d/
-Index: zabbix-2.0.7/conf/zabbix_server.conf
+Index: zabbix-2.0.8/conf/zabbix_server.conf
 ===================================================================
---- zabbix-2.0.7.orig/conf/zabbix_server.conf
-+++ zabbix-2.0.7/conf/zabbix_server.conf
+--- zabbix-2.0.8.orig/conf/zabbix_server.conf
++++ zabbix-2.0.8/conf/zabbix_server.conf
 @@ -36,7 +36,7 @@
  # Default:
  # LogFile=
@@ -191,10 +200,10 @@ Index: zabbix-2.0.7/conf/zabbix_server.conf
  
  ### Option: StartProxyPollers
  #	Number of pre-forked instances of pollers for passive proxies.
-Index: zabbix-2.0.7/frontends/php/conf/zabbix.conf.php.example
+Index: zabbix-2.0.8/frontends/php/conf/zabbix.conf.php.example
 ===================================================================
---- zabbix-2.0.7.orig/frontends/php/conf/zabbix.conf.php.example
-+++ zabbix-2.0.7/frontends/php/conf/zabbix.conf.php.example
+--- zabbix-2.0.8.orig/frontends/php/conf/zabbix.conf.php.example
++++ zabbix-2.0.8/frontends/php/conf/zabbix.conf.php.example
 @@ -2,16 +2,19 @@
  // Zabbix GUI configuration file
  global $DB;

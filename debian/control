@@ -2,9 +2,8 @@ Source: zabbix
 Section: net
 Priority: optional
 Maintainer: Guillaume Plessis <gui@dotdeb.org>
-DM-Upload-Allowed: yes
-Build-Depends: debhelper (>= 9), automake1.9, dh-autoreconf, po-debconf
- ,libcurl4-gnutls-dev | libcurl3-gnutls-dev
+Build-Depends: debhelper (>= 9), automake1.9, dh-autoreconf
+ ,libcurl4-gnutls-dev
  ,libgcrypt-dev
  ,libiksemel-dev
  ,libldap2-dev
@@ -14,11 +13,11 @@ Build-Depends: debhelper (>= 9), automake1.9, dh-autoreconf, po-debconf
  ,libpq-dev
  ,libsnmp9-dev | libsnmp-dev
  ,libsqlite3-dev
- ,libssh2-1-dev (>= 1.0.0)
-Standards-Version: 3.9.3
+ ,libssh2-1-dev
+Standards-Version: 3.9.4
 Homepage: http://zabbix.com
-VCS-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/zabbix.git
-VCS-Git: git://anonscm.debian.org/collab-maint/zabbix.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/zabbix.git
+Vcs-Git: git://anonscm.debian.org/collab-maint/zabbix.git
 
 Package: zabbix-agent
 Architecture: any
@@ -40,8 +39,14 @@ Description: network monitoring solution - agent
 
 Package: zabbix-frontend-php
 Architecture: all
-Depends: ${misc:Depends}, ucf, apache2 | httpd, php5, php5-mysql | php5-mysqlnd | php5-pgsql | php5-sqlite, php5-gd, ttf-dejavu-core
-Suggests: libapache2-mod-php5 | php5-fpm, php5-pgsql | php5-mysql | php5-mysqlnd
+Depends: ${misc:Depends}, ucf
+        ,apache2 | httpd
+        ,php5
+        ,php5-gd
+        ,php5-pgsql | php5-mysql | php5-sqlite
+        ,ttf-dejavu-core
+Recommends: php5-ldap
+Suggests: libapache2-mod-php5 | php5-fpm
 Description: network monitoring solution - PHP front-end
  Zabbix is a server/client network monitoring system with many features.
  It can be used for:
@@ -59,7 +64,7 @@ Description: network monitoring solution - PHP front-end
 Package: zabbix-proxy-mysql
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, fping, adduser, lsb-base
-Recommends: mysql-server (>= 5.0)
+Recommends: mysql-server
 Suggests: logrotate
 Conflicts: zabbix-proxy-pgsql, zabbix-proxy-sqlite3, zabbix-server-mysql, zabbix-server-pgsql, zabbix-server-sqlite3
 Description: network monitoring solution - proxy (using MySQL)
@@ -121,8 +126,7 @@ Description: network monitoring solution - proxy (using SQLite3)
 Package: zabbix-server-mysql
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, fping, adduser, lsb-base
-Pre-Depends: debconf
-Recommends: mysql-server (>= 5.0), snmpd
+Recommends: mysql-server, snmpd
 Suggests: zabbix-frontend-php, logrotate
 Conflicts: zabbix-server-pgsql, zabbix-server-sqlite3, zabbix-proxy-mysql, zabbix-proxy-pgsql, zabbix-proxy-sqlite3
 Description: network monitoring solution - server (using MySQL)
@@ -143,7 +147,6 @@ Description: network monitoring solution - server (using MySQL)
 Package: zabbix-server-pgsql
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, fping, adduser, lsb-base
-Pre-Depends: debconf
 Recommends: postgresql, snmpd
 Suggests: zabbix-frontend-php, logrotate
 Conflicts: zabbix-server-mysql, zabbix-server-sqlite3, zabbix-proxy-mysql, zabbix-proxy-pgsql, zabbix-proxy-sqlite3
@@ -165,7 +168,6 @@ Description: network monitoring solution - server (using PostgreSQL)
 #Package: zabbix-server-sqlite3
 #Architecture: any
 #Depends: ${shlibs:Depends}, ${misc:Depends}, fping, adduser, lsb-base
-#Pre-Depends: debconf
 #Recommends: snmpd
 #Suggests: logrotate
 #Conflicts: zabbix-server-mysql, zabbix-server-pgsql, zabbix-proxy-mysql, zabbix-proxy-pgsql, zabbix-proxy-sqlite3

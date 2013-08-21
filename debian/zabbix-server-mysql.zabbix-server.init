@@ -4,7 +4,7 @@
 # Required-Start:    $remote_fs $network
 # Required-Stop:     $remote_fs
 # Default-Start:     2 3 4 5
-# Default-Stop:	     0 1 6
+# Default-Stop:      0 1 6
 # Should-Start:      mysql
 # Should-Stop:       mysql
 # Short-Description: Start zabbix-server daemon
@@ -26,7 +26,7 @@ DEFAULTS_FILE=/etc/default/zabbix-server
 [ -r "$DEFAULTS_FILE" ] && . $DEFAULTS_FILE
 
 # Load the VERBOSE setting and other rcS variables
-. /lib/init/vars.sh
+[ -f /etc/default/rcS ] && . /etc/default/rcS
 
 # define LSB log_* functions.
 . /lib/lsb/init-functions
