@@ -1,3 +1,4 @@
+ZBX-4986.patch
 config-debian-customizations.patch
 manpages-fix.patch
 manpages-path.patch
@@ -5,5 +6,4 @@ sql-upgrades-path.patch
 openssl2gcrypt.patch
 no-swf-clock.patch
 conffile-in-etc.patch
-basename.patch
 device_discovery.patch

@@ -20,7 +20,7 @@ RETRY=TERM/30/KILL/5
 START=no
 
 # Load the VERBOSE setting and other rcS variables
-. /lib/init/vars.sh
+[ -f /etc/default/rcS ] && . /etc/default/rcS
 
 # define LSB log_* functions.
 . /lib/lsb/init-functions
