@@ -48,7 +48,8 @@ CONFFLAGS_COMMON  = --host=$(DEB_HOST_GNU_TYPE) \
                     --with-ldap \
                     --with-libcurl \
                     --with-net-snmp \
-                    --with-ssh2
+                    --with-ssh2 \
+                    --with-unixodbc
 
 CONFFLAG_IPMI           = $(if $(shell dpkg --status libopenipmi-dev &>/dev/null),--with-openipmi)
 CONFFLAG_SERVER_MYSQL   = --with-mysql
