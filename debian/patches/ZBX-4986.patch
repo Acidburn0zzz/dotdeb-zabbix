@@ -7,10 +7,10 @@ Description: Changed getUrl method for returning relative url's.
  Fix for columns sorting and pagination in frontend-php
  Problem is manifesting with nginx/php-fpm or with Apache/mod_proxy.
 
-Index: zabbix-2.0.8/frontends/php/include/classes/class.curl.php
+Index: zabbix-2.0.9/frontends/php/include/classes/class.curl.php
 ===================================================================
---- zabbix-2.0.8.orig/frontends/php/include/classes/class.curl.php
-+++ zabbix-2.0.8/frontends/php/include/classes/class.curl.php
+--- zabbix-2.0.9.orig/frontends/php/include/classes/class.curl.php
++++ zabbix-2.0.9/frontends/php/include/classes/class.curl.php
 @@ -201,17 +201,28 @@ class Curl {
  		}
  		$this->formatQuery();
