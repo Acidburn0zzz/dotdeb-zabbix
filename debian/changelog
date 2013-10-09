@@ -1,8 +1,26 @@
-zabbix (1:2.0.8-1~dotdeb.0) oldstable; urgency=low
+zabbix (1:2.0.9-1~dotdeb.0) oldstable; urgency=high
 
   * New upstream release
+  * Dropped "ZBX-7091.patch" (applied-upstream).
 
- -- Guillaume Plessis <gui@dotdeb.org>  Wed, 21 Aug 2013 11:30:42 -0700
+ -- Guillaume Plessis <gui@dotdeb.org>  Tue, 08 Oct 2013 21:48:42 -0700
+
+zabbix (1:2.0.8+dfsg-2) unstable; urgency=high
+
+  * New "ZBX-7091.patch" to fix SQL injection vulnerability CVE-2013-5743.
+  * Build-Depends: automake1.9 --> automake (Closes: 724448)
+    Thanks, Eric Dorland.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Fri, 04 Oct 2013 15:45:48 +1000
+
+zabbix (1:2.0.8+dfsg-1) unstable; urgency=low
+
+  * New upstream release [August 2013].
+  * Build with "unixodbc-dev" and "--with-unixodbc".
+  * frontend-php to Recommend "php5-ldap" which is needed for LDAP auth.
+  * Dropped "ZBX-5924.patch" (applied-upstream).
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Fri, 23 Aug 2013 05:37:20 +1000
 
 zabbix (1:2.0.7+dfsg-1) unstable; urgency=low
 

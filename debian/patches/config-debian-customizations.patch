@@ -4,10 +4,10 @@ Author: Christoph Haas <haas@debian.org>
 Reviewed-By: Dmitry Smirnov <onlyjob@member.fsf.org>
 Description: Change default paths and settings in config files specifically for Debian
 
-Index: zabbix-2.0.8/conf/zabbix_agentd.conf
+Index: zabbix-2.0.9/conf/zabbix_agentd.conf
 ===================================================================
---- zabbix-2.0.8.orig/conf/zabbix_agentd.conf
-+++ zabbix-2.0.8/conf/zabbix_agentd.conf
+--- zabbix-2.0.9.orig/conf/zabbix_agentd.conf
++++ zabbix-2.0.9/conf/zabbix_agentd.conf
 @@ -10,6 +10,8 @@
  # Default:
  # PidFile=/tmp/zabbix_agentd.pid
@@ -54,10 +54,10 @@ Index: zabbix-2.0.8/conf/zabbix_agentd.conf
  
  ####### USER-DEFINED MONITORED PARAMETERS #######
  
-Index: zabbix-2.0.8/conf/zabbix_proxy.conf
+Index: zabbix-2.0.9/conf/zabbix_proxy.conf
 ===================================================================
---- zabbix-2.0.8.orig/conf/zabbix_proxy.conf
-+++ zabbix-2.0.8/conf/zabbix_proxy.conf
+--- zabbix-2.0.9.orig/conf/zabbix_proxy.conf
++++ zabbix-2.0.9/conf/zabbix_proxy.conf
 @@ -74,7 +74,7 @@ Hostname=Zabbix proxy
  # Default:
  # LogFile=
@@ -115,10 +115,10 @@ Index: zabbix-2.0.8/conf/zabbix_proxy.conf
 -# Include=/usr/local/etc/zabbix_proxy.conf.d/
 +# Include=/etc/zabbix/zabbix_proxy.general.conf
 +# Include=/etc/zabbix/zabbix_proxy.conf.d/
-Index: zabbix-2.0.8/conf/zabbix_server.conf
+Index: zabbix-2.0.9/conf/zabbix_server.conf
 ===================================================================
---- zabbix-2.0.8.orig/conf/zabbix_server.conf
-+++ zabbix-2.0.8/conf/zabbix_server.conf
+--- zabbix-2.0.9.orig/conf/zabbix_server.conf
++++ zabbix-2.0.9/conf/zabbix_server.conf
 @@ -36,7 +36,7 @@
  # Default:
  # LogFile=
@@ -200,10 +200,10 @@ Index: zabbix-2.0.8/conf/zabbix_server.conf
  
  ### Option: StartProxyPollers
  #	Number of pre-forked instances of pollers for passive proxies.
-Index: zabbix-2.0.8/frontends/php/conf/zabbix.conf.php.example
+Index: zabbix-2.0.9/frontends/php/conf/zabbix.conf.php.example
 ===================================================================
---- zabbix-2.0.8.orig/frontends/php/conf/zabbix.conf.php.example
-+++ zabbix-2.0.8/frontends/php/conf/zabbix.conf.php.example
+--- zabbix-2.0.9.orig/frontends/php/conf/zabbix.conf.php.example
++++ zabbix-2.0.9/frontends/php/conf/zabbix.conf.php.example
 @@ -2,16 +2,19 @@
  // Zabbix GUI configuration file
  global $DB;
