@@ -1,8 +1,21 @@
-zabbix (1:2.2.2-1~dotdeb.0) oldstable; urgency=low
+zabbix (1:2.2.2-1~dotdeb.0) oldstable; urgency=high
 
-  * New upstream release
+  * Rebuilt for Dotdeb
 
- -- Guillaume Plessis <gui@dotdeb.org>  Wed, 12 Feb 2014 18:27:42 -0700
+ -- Guillaume Plessis <gui@dotdeb.org>  Thu, 13 Feb 2014 13:03:42 -0700
+
+zabbix (1:2.2.2+dfsg-1) unstable; urgency=high
+
+  * New upstream release [February 2014].
+    + CVE-2014-1682 (ZBX-7703) fixed vulnerability allowing to impersonate
+      other users without proper credentials when using HTTP authentication
+      (Closes: #737818).
+    + CVE-2013-5572 (ZBX-6721) fixed LDAP authentication.
+    + CVE-2014-1685 (ZBX-7693) restrict admin's ability to update media
+      for other users.
+  * Dropped "build_modernise-automake.patch" (applied-upstream).
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Thu, 13 Feb 2014 21:57:26 +1100
 
 zabbix (1:2.2.1+dfsg-1) unstable; urgency=low
 
