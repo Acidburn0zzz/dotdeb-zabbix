@@ -1,4 +1,3 @@
-ZBX-7703.patch
 config_debianisation.patch
 config_frontend-conffile-in-etc.patch
 java-gateway.patch
