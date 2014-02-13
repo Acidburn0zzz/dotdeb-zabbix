@@ -19,6 +19,7 @@ Build-Depends: debhelper (>= 9), automake, dh-autoreconf
 ## java-gateway deps:
  ,javahelper
 Build-Depends-Indep: default-jdk
+                    ,libandroid-json-org-java
                     ,liblogback-java
                     ,libslf4j-java
                     ,junit4
