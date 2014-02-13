@@ -1,13 +1,14 @@
-Description: removal of Flash clock that does not have its source code included
+Last-Update: 2013-11-15
+Forwarded: 2012-03-22
 Author: Christoph Haas <haas@debian.org>
 Bug-Zabbix: https://support.zabbix.com/browse/ZBX-4794
-Forwarded: 2012-03-22
+Description: removal of Flash clock that does not have its source code included
 
-Index: zabbix-2.0.9/frontends/php/api/classes/CScreenItem.php
+Index: zabbix-2.2.2/frontends/php/api/classes/CScreenItem.php
 ===================================================================
---- zabbix-2.0.9.orig/frontends/php/api/classes/CScreenItem.php
-+++ zabbix-2.0.9/frontends/php/api/classes/CScreenItem.php
-@@ -44,7 +44,8 @@ class CScreenItem extends CZBXAPI {
+--- zabbix-2.2.2.orig/frontends/php/api/classes/CScreenItem.php
++++ zabbix-2.2.2/frontends/php/api/classes/CScreenItem.php
+@@ -42,7 +42,8 @@ class CScreenItem extends CZBXAPI {
  		SCREEN_RESOURCE_HOSTS_INFO,
  		SCREEN_RESOURCE_TRIGGERS_INFO,
  		SCREEN_RESOURCE_SERVER_INFO,
@@ -17,10 +18,10 @@ Index: zabbix-2.0.9/frontends/php/api/classes/CScreenItem.php
  		SCREEN_RESOURCE_SCREEN,
  		SCREEN_RESOURCE_TRIGGERS_OVERVIEW,
  		SCREEN_RESOURCE_DATA_OVERVIEW,
-Index: zabbix-2.0.9/frontends/php/include/screens.inc.php
+Index: zabbix-2.2.2/frontends/php/include/screens.inc.php
 ===================================================================
---- zabbix-2.0.9.orig/frontends/php/include/screens.inc.php
-+++ zabbix-2.0.9/frontends/php/include/screens.inc.php
+--- zabbix-2.2.2.orig/frontends/php/include/screens.inc.php
++++ zabbix-2.2.2/frontends/php/include/screens.inc.php
 @@ -25,7 +25,8 @@ require_once dirname(__FILE__).'/js.inc.
  
  function screen_resources($resource = null) {

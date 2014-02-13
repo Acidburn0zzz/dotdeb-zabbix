@@ -6,6 +6,7 @@
 ## Define the names of the resulting binary packages
 PKG_AGENT = zabbix-agent
 PKG_FRONTEND = zabbix-frontend-php
+PKG_GATEWAY_JAVA = zabbix-java-gateway
 PKG_PROXY_MYSQL = zabbix-proxy-mysql
 PKG_PROXY_PGSQL = zabbix-proxy-pgsql
 PKG_PROXY_SQLITE3 = zabbix-proxy-sqlite3
@@ -19,6 +20,7 @@ ifeq ($(DEB_HOST_ARCH_OS),linux)
         export DEB_BUILD_OPTIONS+=parallel=$(shell getconf _NPROCESSORS_ONLN)
     endif
 endif
+$(info DEB_BUILD_OPTIONS=$(DEB_BUILD_OPTIONS))
 
 # These are used for cross-compiling and for saving the configure script
 # from having to guess our platform (since we know it already)
@@ -47,10 +49,17 @@ CONFFLAGS_COMMON  = --host=$(DEB_HOST_GNU_TYPE) \
                     --with-jabber \
                     --with-ldap \
                     --with-libcurl \
+                    --with-libxml2 \
                     --with-net-snmp \
                     --with-ssh2 \
                     --with-unixodbc
 
+## Hurd and kFreeBSD only have Java 1.5 which can't compile java-gateway sources...
+#ifneq ($(DEB_BUILD_ARCH_OS),hurd)
+#ifneq ($(DEB_BUILD_ARCH_OS),kfreebsd)
+#CONFFLAGS_COMMON += --enable-java
+#endif
+#endif
 CONFFLAG_IPMI           = $(if $(shell dpkg --status libopenipmi-dev &>/dev/null),--with-openipmi)
 CONFFLAG_SERVER_MYSQL   = --with-mysql
 CONFFLAG_SERVER_PGSQL   = --with-postgresql
@@ -64,7 +73,7 @@ BUILD_PREFIX := $(CURDIR)/debian/tmp-build
 VARIANTS := MYSQL PGSQL SQLITE3
 
 %:
-	dh $@ --parallel --max-parallel=4 --with autoreconf
+	dh $@ --parallel --max-parallel=4 --with autoreconf,javahelper
 
 override_dh_clean:
 	@echo Removing build directories in $(BUILD_PREFIX)
@@ -94,6 +103,13 @@ override_dh_auto_build:
         dh_auto_build --sourcedirectory=$(BUILD_PREFIX)-$i --max-parallel=4 \
     ;)
 
+build-indep:
+	## build zabbix-java-gateway.jar
+	## override_jh_build:
+	JAVA_HOME=/usr/lib/jvm/default-java \
+        CLASSPATH=/usr/share/java/json.jar:/usr/share/java/logback-core.jar:/usr/share/java/logback-classic.jar:/usr/share/java/slf4j-api.jar \
+        jh_build --no-javadoc --main=com.zabbix.gateway.JavaGateway debian/tmp-build-MYSQL/src/zabbix_java/zabbix-java-gateway.jar src/zabbix_java/src/com
+
 override_dh_auto_install:
 	## build man pages
 	dh_auto_install --sourcedirectory=$(BUILD_PREFIX)-MYSQL/man \
@@ -105,9 +121,22 @@ override_dh_install:
 	    find $$i -type f -name '*.sql' -printf 'compressing %p\n' \
 	        -exec gzip -9 '{}' \;;\
 	done
+	## Those files need to be renamed:
+	if [ -d "$(CURDIR)/debian/$(PKG_GATEWAY_JAVA)" ]; then \
+            cp -v src/zabbix_java/lib/logback.xml  $(CURDIR)/debian/$(PKG_GATEWAY_JAVA)/etc/zabbix/zabbix_java_gateway.logback.xml ;\
+            cp -v src/zabbix_java/settings.sh  $(CURDIR)/debian/$(PKG_GATEWAY_JAVA)/etc/zabbix/zabbix_java_gateway.conf ;\
+        fi
+
+override_jh_depends:
+	## make sure java-gateway.jar is executable. This is needed for jh_depends to generate correct {java:Depends}
+	if [ -d "$(CURDIR)/debian/$(PKG_GATEWAY_JAVA)" ]; then \
+            chmod -v +x $(CURDIR)/debian/$(PKG_GATEWAY_JAVA)/usr/sbin/*.jar ;\
+        fi
+	jh_depends -v -p$(PKG_GATEWAY_JAVA)
 
 override_dh_installinit:
 	dh_installinit -p $(PKG_AGENT)
+	dh_installinit -p $(PKG_GATEWAY_JAVA)
 	dh_installinit -p $(PKG_PROXY_MYSQL) --name zabbix-proxy
 	dh_installinit -p $(PKG_PROXY_PGSQL) --name zabbix-proxy
 	dh_installinit -p $(PKG_PROXY_SQLITE3) --name zabbix-proxy
@@ -141,6 +170,8 @@ $(PKG)_$(VER)$(DTYPE).orig.tar.xz:
 	cd $(PKG)-$(VER) \
         && find . -type f -name '*.exe' -delete -printf 'removed %p\n' \
         && $(RM) -r -v \
+            bin/win*/dev/*.dll \
+            bin/win*/dev/*.lib \
             frontends/php/images/flash \
             src/zabbix_java/lib/*.jar
 	@echo "# Packing..."

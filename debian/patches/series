@@ -1,9 +1,9 @@
-ZBX-4986.patch
-config-debian-customizations.patch
+ZBX-7703.patch
+config_debianisation.patch
+config_frontend-conffile-in-etc.patch
+java-gateway.patch
 manpages-fix.patch
 manpages-path.patch
-sql-upgrades-path.patch
-openssl2gcrypt.patch
 no-swf-clock.patch
-conffile-in-etc.patch
+openssl2gcrypt.patch
 device_discovery.patch

@@ -1,0 +1,48 @@
+Last-Update: 2014-02-08
+Author: Dmitry Smirnov <onlyjob@member.fsf.org>
+Bug-Zabbix: https://support.zabbix.com/browse/ZBX-7703
+Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=737818
+Origin: svn://svn.zabbix.com/branches/2.2@42012
+Date: Fri, 31 Jan 2014 07:48:56 +0000
+Description: CVE-2014-1682 fix API vulnerability
+ [ZBX-7703] fixed being able to switch users without
+ proper credentials when using HTTP authentication
+
+ Before the fix: - When Zabbix was configured to use
+ HTTP authentication, an API user could login with his HTTP authentication
+ credentials and then use the user.login method to login
+ as a different user without specifying a password.
+
+ After the fix: - The user.login method will now check if the user
+ name passed to the method is the same as the name used for HTTP
+ authentication. That way an API user will only be able to login as a user
+ for which he has HTTP authentication credentials. The method will now also
+ throw an error if HTTP authentication is selected in Zabbix, but  not
+ configured on the web server.
+
+Index: zabbix-2.2.2/frontends/php/api/classes/CUser.php
+===================================================================
+--- zabbix-2.2.2.orig/frontends/php/api/classes/CUser.php
++++ zabbix-2.2.2/frontends/php/api/classes/CUser.php
+@@ -1108,6 +1108,21 @@ class CUser extends CZBXAPI {
+ 			}
+ 		}
+ 
++		if ($authType == ZBX_AUTH_HTTP) {
++			// if PHP_AUTH_USER is not set, it means that HTTP authentication is not enabled
++			if (!isset($_SERVER['PHP_AUTH_USER'])) {
++				self::exception(ZBX_API_ERROR_PARAMETERS, _('Cannot login.'));
++			}
++			// check if the user name used when calling the API matches the one used for HTTP authentication
++			elseif ($name !== $_SERVER['PHP_AUTH_USER']) {
++				self::exception(ZBX_API_ERROR_PARAMETERS,
++					_s('Login name "%1$s" does not match the name "%2$s" used to pass HTTP authentication.',
++						$name, $_SERVER['PHP_AUTH_USER']
++					)
++				);
++			}
++		}
++
+ 		try {
+ 			switch ($authType) {
+ 				case ZBX_AUTH_LDAP:
