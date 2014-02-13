@@ -21,3 +21,17 @@
   backporting hard. As it's just a handful of small files I decided to
   rather keep the upstream files.
   
+
+  Building "zabbix-java-gateway" package
+  --------------------------------------
+
+  We do not use upstream build system to produce "zabbix-java-gateway.jar"
+  hence we do not pass "--enable-java" to configure script, otherwise we
+  would have to Build-Depend on JDK (and other java packages) on all
+  architectures even when only architecture dependent packages are built
+  (e.g. on buildd servers). "zabbix-java-gateway.jar" is built
+  from "build-indep" target so we can keep Java-related dependencies
+  in Build-Depends-Indep and avoid troubles with un-installability of Java
+  dependencies on some architectures as well as to avoid FTBFS due
+  to outdated JDK 1.5 which is unable to compile .java sources on Hurd and
+  kFreeBSD.

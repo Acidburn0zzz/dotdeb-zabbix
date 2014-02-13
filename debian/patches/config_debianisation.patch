@@ -1,13 +1,13 @@
-Last-Update: 2013-07-29
+Last-Update: 2013-11-20
 Forwarded: not-needed
 Author: Christoph Haas <haas@debian.org>
 Reviewed-By: Dmitry Smirnov <onlyjob@member.fsf.org>
 Description: Change default paths and settings in config files specifically for Debian
 
-Index: zabbix-2.0.9/conf/zabbix_agentd.conf
+Index: zabbix-2.2.2/conf/zabbix_agentd.conf
 ===================================================================
---- zabbix-2.0.9.orig/conf/zabbix_agentd.conf
-+++ zabbix-2.0.9/conf/zabbix_agentd.conf
+--- zabbix-2.2.2.orig/conf/zabbix_agentd.conf
++++ zabbix-2.2.2/conf/zabbix_agentd.conf
 @@ -10,6 +10,8 @@
  # Default:
  # PidFile=/tmp/zabbix_agentd.pid
@@ -35,7 +35,7 @@ Index: zabbix-2.0.9/conf/zabbix_agentd.conf
  ### Option: DebugLevel
  #	Specifies debug level
  #	0 - no debug
-@@ -206,14 +210,15 @@ Hostname=Zabbix server
+@@ -233,14 +237,15 @@ Hostname=Zabbix server
  
  ### Option: Include
  #	You may include individual files or all files in a directory in the configuration file.
@@ -54,10 +54,10 @@ Index: zabbix-2.0.9/conf/zabbix_agentd.conf
  
  ####### USER-DEFINED MONITORED PARAMETERS #######
  
-Index: zabbix-2.0.9/conf/zabbix_proxy.conf
+Index: zabbix-2.2.2/conf/zabbix_proxy.conf
 ===================================================================
---- zabbix-2.0.9.orig/conf/zabbix_proxy.conf
-+++ zabbix-2.0.9/conf/zabbix_proxy.conf
+--- zabbix-2.2.2.orig/conf/zabbix_proxy.conf
++++ zabbix-2.2.2/conf/zabbix_proxy.conf
 @@ -74,7 +74,7 @@ Hostname=Zabbix proxy
  # Default:
  # LogFile=
@@ -84,7 +84,7 @@ Index: zabbix-2.0.9/conf/zabbix_proxy.conf
  
  ### Option: DBPassword
  #	Database password. Ignored for SQLite.
-@@ -417,6 +418,7 @@ DBUser=root
+@@ -443,6 +444,7 @@ DBUser=root
  # Mandatory: no
  # Default:
  # FpingLocation=/usr/sbin/fping
@@ -92,20 +92,21 @@ Index: zabbix-2.0.9/conf/zabbix_proxy.conf
  
  ### Option: Fping6Location
  #	Location of fping6.
-@@ -426,6 +428,7 @@ DBUser=root
+@@ -452,6 +454,7 @@ DBUser=root
  # Mandatory: no
  # Default:
  # Fping6Location=/usr/sbin/fping6
 +Fping6Location=/usr/bin/fping6
  
  ### Option: SSHKeyLocation
- #	Location of public and private keys for SSH checks and actions
-@@ -453,11 +456,11 @@ DBUser=root
+ #	Location of public and private keys for SSH checks and actions.
+@@ -489,14 +492,15 @@ DBUser=root
  
  ### Option: Include
  #	You may include individual files or all files in a directory in the configuration file.
 -#	Installing Zabbix will create include directory in /usr/local/etc, unless modified during the compile time.
 +#	Installing Zabbix will create include directory in /etc/zabbix, unless modified during the compile time.
++
  #
  # Mandatory: no
  # Default:
@@ -115,10 +116,13 @@ Index: zabbix-2.0.9/conf/zabbix_proxy.conf
 -# Include=/usr/local/etc/zabbix_proxy.conf.d/
 +# Include=/etc/zabbix/zabbix_proxy.general.conf
 +# Include=/etc/zabbix/zabbix_proxy.conf.d/
-Index: zabbix-2.0.9/conf/zabbix_server.conf
+ 
+ ####### LOADABLE MODULES #######
+ 
+Index: zabbix-2.2.2/conf/zabbix_server.conf
 ===================================================================
---- zabbix-2.0.9.orig/conf/zabbix_server.conf
-+++ zabbix-2.0.9/conf/zabbix_server.conf
+--- zabbix-2.2.2.orig/conf/zabbix_server.conf
++++ zabbix-2.2.2/conf/zabbix_server.conf
 @@ -36,7 +36,7 @@
  # Default:
  # LogFile=
@@ -155,7 +159,7 @@ Index: zabbix-2.0.9/conf/zabbix_server.conf
  
  ### Option: DBPassword
  #	Database password. Ignored for SQLite.
-@@ -391,6 +395,8 @@ DBUser=root
+@@ -429,6 +433,8 @@ DBUser=root
  # Default:
  # AlertScriptsPath=${datadir}/zabbix/alertscripts
  
@@ -164,30 +168,31 @@ Index: zabbix-2.0.9/conf/zabbix_server.conf
  ### Option: ExternalScripts
  #	Full path to location of external scripts.
  #	Default depends on compilation options.
-@@ -407,6 +413,8 @@ DBUser=root
+@@ -443,7 +449,9 @@ DBUser=root
+ #
+ # Mandatory: no
  # Default:
- # FpingLocation=/usr/sbin/fping
- 
-+FpingLocation=/usr/bin/fping
+-# FpingLocation=/usr/sbin/fping
++# FpingLocation=/usr/bin/fping
 +
++FpingLocation=/usr/bin/fping
+ 
  ### Option: Fping6Location
  #	Location of fping6.
- #	Make sure that fping6 binary has root ownership and SUID flag set.
-@@ -416,6 +424,8 @@ DBUser=root
- # Default:
- # Fping6Location=/usr/sbin/fping6
- 
-+Fping6Location=/usr/bin/fping6
-+
- ### Option: SSHKeyLocation
- #	Location of public and private keys for SSH checks and actions
+@@ -452,7 +460,7 @@ DBUser=root
  #
-@@ -442,14 +452,14 @@ DBUser=root
+ # Mandatory: no
+ # Default:
+-# Fping6Location=/usr/sbin/fping6
++# Fping6Location=/usr/bin/fping6
+ 
+ ### Option: SSHKeyLocation
+ #	Location of public and private keys for SSH checks and actions.
+@@ -516,14 +524,13 @@ DBUser=root
  
  ### Option: Include
  #	You may include individual files or all files in a directory in the configuration file.
 -#	Installing Zabbix will create include directory in /usr/local/etc, unless modified during the compile time.
-+#	Installing Zabbix will create include directory in /etc/zabbix, unless modified during the compile time.
  #
  # Mandatory: no
  # Default:
@@ -198,12 +203,12 @@ Index: zabbix-2.0.9/conf/zabbix_server.conf
 +# Include=/etc/zabbix/zabbix_server.general.conf
 +# Include=/etc/zabbix/zabbix_server.conf.d/
  
- ### Option: StartProxyPollers
- #	Number of pre-forked instances of pollers for passive proxies.
-Index: zabbix-2.0.9/frontends/php/conf/zabbix.conf.php.example
+ ####### LOADABLE MODULES #######
+ 
+Index: zabbix-2.2.2/frontends/php/conf/zabbix.conf.php.example
 ===================================================================
---- zabbix-2.0.9.orig/frontends/php/conf/zabbix.conf.php.example
-+++ zabbix-2.0.9/frontends/php/conf/zabbix.conf.php.example
+--- zabbix-2.2.2.orig/frontends/php/conf/zabbix.conf.php.example
++++ zabbix-2.2.2/frontends/php/conf/zabbix.conf.php.example
 @@ -2,16 +2,19 @@
  // Zabbix GUI configuration file
  global $DB;

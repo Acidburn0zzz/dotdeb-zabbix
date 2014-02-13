@@ -1,9 +1,108 @@
-zabbix (1:2.0.9-1~dotdeb.0) oldstable; urgency=high
+zabbix (1:2.2.2-1~dotdeb.0) oldstable; urgency=low
 
   * New upstream release
-  * Dropped "ZBX-7091.patch" (applied-upstream).
 
- -- Guillaume Plessis <gui@dotdeb.org>  Tue, 08 Oct 2013 21:48:42 -0700
+ -- Guillaume Plessis <gui@dotdeb.org>  Wed, 12 Feb 2014 18:27:42 -0700
+
+zabbix (1:2.2.1+dfsg-1) unstable; urgency=low
+
+  * New upstream release [December 2013].
+    + patches dropped:
+      - ZBX-7479.patch
+      - build_fix-hostname-FTBFS.patch
+    + patches updated:
+      + build_modernise-automake.patch
+      + config_frontend-conffile-in-etc.patch
+      + openssl2gcrypt.patch
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Sun, 15 Dec 2013 10:15:55 +1100
+
+zabbix (1:2.2.0+dfsg-6) unstable; urgency=high
+
+  * CVE-2013-6824: new upstream patch "ZBX-7479.patch" to fix command
+    injection vulnerability in Agent.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Wed, 04 Dec 2013 15:25:24 +1100
+
+zabbix (1:2.2.0+dfsg-5) unstable; urgency=low
+
+  * Build "zabbix-java-gateway" using "jh_build" from "build-indep" target;
+    removed "--enable-java" from build options; moved java-related
+    Build-Depends to Build-Depends-Indep.
+    Thanks to those changes Java no longer needed when only architecture
+    dependent packages are built (e.g. on buildd servers).
+  * Added note regarding building "zabbix-java-gateway" to README.source.
+  * java-gateway: dropped obsolete directory "/etc/logrotate.d".
+  * init: minor cleanup & corrections.
+  * java-gateway.init: restart improvements: check if service really stopped;
+    wait up to 5 sec. (if necessary) after stop before attempting to start
+    service again; exit with error code if daemon didn't stop.
+  * java-gateway.init: don't pass "--exec $DAEMON" on stop to fix daemon
+    restart after "/usr/bin/java" switched to another alternative.
+  * zabbix_java_gateway.conf template extended with JAVA_OPTIONS.
+    Use case: pass something like "-Xmx256m" to limit daemon memory usage
+    which can be too high by default.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Sun, 24 Nov 2013 02:25:14 +1100
+
+zabbix (1:2.2.0+dfsg-4) unstable; urgency=low
+
+  * Don't build with "--enable-java" on Hurd and kFreeBSD architectures
+    due to compilation errors from Java 1.5.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Fri, 22 Nov 2013 21:44:55 +1100
+
+zabbix (1:2.2.0+dfsg-3) unstable; urgency=low
+
+  * "debian/rules" to check for existence of arch-all package before
+    attempting to manipulate files in it. This is necessary to avoid FTBFS
+    on buildd servers where only architecture dependent packages are built.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Fri, 22 Nov 2013 18:08:30 +1100
+
+zabbix (1:2.2.0+dfsg-2) unstable; urgency=low
+
+  * New binary package "zabbix-java-gateway".
+    + build with "--enable-java".
+    + new Build-Depends:
+      + default-jdk
+      + javahelper
+      + libandroid-json-org-java
+      + liblogback-java
+      + libslf4j-java
+      + junit4
+  * Minor updates to "rules" and config file comments.
+  * Patchworks:
+    + patches sorted and re-named.
+    + new patch to debianise java-gateway.
+    + new patch to fix FTBFS on non-Linux architectures.
+    + new patch to modernise automake setup in "configure.in".
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Wed, 20 Nov 2013 05:49:54 +1100
+
+zabbix (1:2.2.0+dfsg-1) unstable; urgency=low
+
+  * New major upstream release [November 2013].
+    - dropped obsolete backported "ZBX-4986.patch"; refreshed other patches.
+  * Addedd NEWS notes about automatic DB schema upgrade.
+  * Removed "upgrading the database" note from README.
+  * No longer ship "patch.sql"; dropped "sql-upgrades-path.patch".
+  * Removed obsolete symlink to "/etc/zabbix/zabbix.conf.php"
+    and corresponding lintian-override.
+  * get-orig-source to remove windows .dll and .lib files from orig.tar.
+  * Build with "--with-libxml2"; added "libxml2-dev" to Build-Depends.
+  * Standards updated to 3.9.5.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Fri, 15 Nov 2013 18:59:16 +1100
+
+zabbix (1:2.0.9+dfsg-1) unstable; urgency=low
+
+  * New upstream release [October 2013]
+    - dropped backported "ZBX-7091.patch".
+  * Added *.ttf license/copyright paragraph to "debian/copyright".
+  * Print contents of DEB_BUILD_OPTIONS on build-time.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Fri, 11 Oct 2013 13:53:47 +1100
 
 zabbix (1:2.0.8+dfsg-2) unstable; urgency=high
 
