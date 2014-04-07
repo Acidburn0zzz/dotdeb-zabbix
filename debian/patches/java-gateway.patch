@@ -3,10 +3,10 @@ Forwarded: not-needed
 Author: Dmitry Smirnov <onlyjob@member.fsf.org>
 Description: debianisation of zabbix-java-gateway
 
-Index: zabbix-2.2.2/src/zabbix_java/Makefile.am
+Index: zabbix-2.2.3/src/zabbix_java/Makefile.am
 ===================================================================
---- zabbix-2.2.2.orig/src/zabbix_java/Makefile.am
-+++ zabbix-2.2.2/src/zabbix_java/Makefile.am
+--- zabbix-2.2.3.orig/src/zabbix_java/Makefile.am
++++ zabbix-2.2.3/src/zabbix_java/Makefile.am
 @@ -9,9 +9,9 @@ EXTRA_DIST = \
  	shutdown.sh \
  	startup.sh
@@ -20,10 +20,10 @@ Index: zabbix-2.2.2/src/zabbix_java/Makefile.am
  
  ZJG_DEST = $(DESTDIR)$(sbindir)/zabbix_java
  
-Index: zabbix-2.2.2/src/zabbix_java/settings.sh
+Index: zabbix-2.2.3/src/zabbix_java/settings.sh
 ===================================================================
---- zabbix-2.2.2.orig/src/zabbix_java/settings.sh
-+++ zabbix-2.2.2/src/zabbix_java/settings.sh
+--- zabbix-2.2.3.orig/src/zabbix_java/settings.sh
++++ zabbix-2.2.3/src/zabbix_java/settings.sh
 @@ -1,5 +1,5 @@
  # This is a configuration file for Zabbix Java Gateway.
 -# It is sourced by startup.sh and shutdown.sh scripts.
@@ -56,10 +56,10 @@ Index: zabbix-2.2.2/src/zabbix_java/settings.sh
 +# Mandatory: no
 +#
 +# JAVA_OPTIONS="-Xmx256m"
-Index: zabbix-2.2.2/src/zabbix_java/lib/logback.xml
+Index: zabbix-2.2.3/src/zabbix_java/lib/logback.xml
 ===================================================================
---- zabbix-2.2.2.orig/src/zabbix_java/lib/logback.xml
-+++ zabbix-2.2.2/src/zabbix_java/lib/logback.xml
+--- zabbix-2.2.3.orig/src/zabbix_java/lib/logback.xml
++++ zabbix-2.2.3/src/zabbix_java/lib/logback.xml
 @@ -2,16 +2,16 @@
  
  	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">

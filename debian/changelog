@@ -1,3 +1,9 @@
+zabbix (1:2.2.3-1~dotdeb.0) oldstable; urgency=high
+
+  * New upstream release
+
+ -- Guillaume Plessis <gui@dotdeb.org>  Mon, 07 Apr 2014 12:30:42 -0700
+
 zabbix (1:2.2.2-1~dotdeb.0) oldstable; urgency=high
 
   * Rebuilt for Dotdeb

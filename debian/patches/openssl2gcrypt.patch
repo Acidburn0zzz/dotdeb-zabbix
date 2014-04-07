@@ -3,10 +3,10 @@ Author: Dmitry Smirnov <onlyjob@member.fsf.org>
 Forwarded: not-needed
 Description: use 'libgcrypt' in order to avoid linking with OpenSSL due to license conflict.
 
-Index: zabbix-2.2.2/m4/netsnmp.m4
+Index: zabbix-2.2.3/m4/netsnmp.m4
 ===================================================================
---- zabbix-2.2.2.orig/m4/netsnmp.m4
-+++ zabbix-2.2.2/m4/netsnmp.m4
+--- zabbix-2.2.3.orig/m4/netsnmp.m4
++++ zabbix-2.2.3/m4/netsnmp.m4
 @@ -55,7 +55,7 @@ AC_HELP_STRING([--with-net-snmp@<:@=ARG@
  			esac
  		done
